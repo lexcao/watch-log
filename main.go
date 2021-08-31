@@ -11,15 +11,18 @@ import (
 
 var (
 	omit = ""
-	pick = "ts"
+	pick = ""
 
-	match = map[string]string{
-		"language": "Go",
-	}
+	match = map[string]string{}
 )
 
 type Node = map[string]interface{}
 type PipeFunc = func(Node) Node
+
+const (
+	DEFAULT = "\033[0m"
+	RED     = "\033[0;31m"
+)
 
 func main() {
 	// TODO removed by file
@@ -36,7 +39,7 @@ func main() {
 		jsonMap := make(Node)
 		err := json.Unmarshal([]byte(line), &jsonMap)
 		if err != nil {
-			fmt.Println("\033[0;31m", err)
+			render(err, RED)
 			continue
 		}
 
@@ -119,11 +122,18 @@ func main() {
 		}
 		sort.Strings(keys)
 
-		fmt.Println("========================================")
+		render("========================================")
 		for _, k := range keys {
 			fmt.Printf("[%s]: %s\n", k, output[k])
 		}
-		fmt.Println("========================================")
+		render("========================================")
+	}
+}
+func render(value interface{}, color ...string) {
+	if len(color) == 0 {
+		fmt.Println(value)
+	} else {
+		fmt.Println(color[0], value, DEFAULT)
 	}
 }
 
