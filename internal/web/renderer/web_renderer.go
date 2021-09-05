@@ -28,6 +28,9 @@ func NewWebRenderer(port int) component.Renderer {
 }
 
 func (r *WebRenderer) Render(entry *model.Entry) {
+	if len(entry.PipelinedObject) == 0 {
+		return
+	}
 	select {
 	case socket.Sending() <- entry:
 	case <-time.After(1 * time.Second):

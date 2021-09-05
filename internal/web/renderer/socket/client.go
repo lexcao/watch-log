@@ -23,6 +23,8 @@ type client struct {
 }
 
 func (c *client) ready(conn *websocket.Conn) {
+	log.Info("Connection is ready")
+
 	c.connection = conn
 	c.onSending = make(chan *model.Entry)
 	c.onReceive = make(chan *model.Entry)
@@ -70,6 +72,7 @@ func (c *client) receiving() {
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Errorf("Receiving c error: %v", err)
+				break
 			}
 			entry.Err = err
 		}
