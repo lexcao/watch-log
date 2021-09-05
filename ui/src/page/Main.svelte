@@ -14,21 +14,6 @@
         connect()
     })
 
-    const mock = [
-        {
-            Err: null,
-            PipelinedObject: {
-                'language': 'Go',
-                'ts': 1234567891,
-                'level': 'INFO',
-            },
-        },
-        {
-            Err: 'Json parse error',
-            Origin: 'this is a origin log',
-        },
-    ]
-
     const connect = () => {
         if ($connected) {
             return
@@ -44,8 +29,8 @@
 
 <SearchBar/>
 
-{#if mock}
-    {#each mock as message}
+{#if messages}
+    {#each $messages as message}
         <EntryCard entry="{message}"/>
     {/each}
 {/if}
