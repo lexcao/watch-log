@@ -1,4 +1,4 @@
-package console
+package renderer
 
 import (
 	"fmt"
@@ -12,10 +12,10 @@ const (
 	RED     = "\033[0;31m"
 )
 
-type Renderer struct {
+type ConsoleRenderer struct {
 }
 
-func (c Renderer) Render(entry *model.Entry) {
+func (c ConsoleRenderer) Render(entry *model.Entry) {
 	output := entry.PipelinedObject
 
 	if len(output) == 0 {

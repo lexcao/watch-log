@@ -3,7 +3,7 @@ package converter
 import (
 	"fmt"
 
-	"github.com/lexcao/watch-log/internal/pipeline/field/matcher"
+	"github.com/lexcao/watch-log/internal/common/pipeline/field/matcher"
 )
 
 func StringConverter() matcher.Matcher {

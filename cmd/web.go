@@ -1,6 +1,11 @@
 package cmd
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/lexcao/watch-log/internal/web/controller"
+	"github.com/lexcao/watch-log/internal/web/renderer"
+	"github.com/lexcao/watch-log/pkg/app"
+	"github.com/spf13/cobra"
+)
 
 var (
 	WebPort int
@@ -10,7 +15,10 @@ var webCmd = &cobra.Command{
 	Use:   "web",
 	Short: "Watch logs on web ui",
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO web.start
+		app.New(
+			app.Controller(controller.WebController{}),
+			app.Renderer(renderer.WebRenderer{}),
+		).Run()
 	},
 }
 

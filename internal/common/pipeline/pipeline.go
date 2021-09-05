@@ -3,7 +3,7 @@ package pipeline
 import (
 	"sort"
 
-	"github.com/lexcao/watch-log/internal/pipeline/field"
+	"github.com/lexcao/watch-log/internal/common/pipeline/field"
 	"github.com/lexcao/watch-log/pkg/component"
 	"github.com/lexcao/watch-log/pkg/model"
 )
