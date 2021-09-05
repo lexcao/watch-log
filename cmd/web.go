@@ -17,7 +17,7 @@ var webCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		app.New(
 			app.Controller(controller.WebController{}),
-			app.Renderer(renderer.WebRenderer{}),
+			app.Renderer(renderer.NewWebRenderer(WebPort)),
 		).Run()
 	},
 }

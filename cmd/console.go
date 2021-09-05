@@ -10,8 +10,7 @@ var consoleCmd = &cobra.Command{
 	Use:   "console",
 	Short: "Watch logs for console output",
 	Run: func(cmd *cobra.Command, args []string) {
-		renderer := app.Renderer(renderer.ConsoleRenderer{})
-		app.New(renderer).Run()
+		app.New(app.Renderer(renderer.ConsoleRenderer{})).Run()
 	},
 }
 
