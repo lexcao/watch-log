@@ -6,7 +6,7 @@ import (
 	"github.com/lexcao/watch-log/internal/loader/file"
 	"github.com/lexcao/watch-log/internal/parser/json"
 	"github.com/lexcao/watch-log/internal/pipeline"
-	"github.com/lexcao/watch-log/internal/pipeline/field"
+	"github.com/lexcao/watch-log/internal/pipeline/match"
 	"github.com/lexcao/watch-log/pkg/component"
 	"github.com/lexcao/watch-log/pkg/model"
 )
@@ -26,8 +26,11 @@ func Run(render component.Renderer) {
 	parser := json.Parser{}
 	pipe := pipeline.NewProcessPipeline()
 
-	pipe.AddPipe(field.OmitPipeline("ts"))
-	pipe.AddPipe(field.PickPipeline("language"))
+	//pipe.AddPipe(field.OmitPipeline("ts"))
+	//pipe.AddPipe(field.PickPipeline("language"))
+	pipe.AddPipe(match.Pipeline{Match: model.Object{
+		"language": "Java",
+	}})
 
 	line := loader.Load(os.Stdin)
 

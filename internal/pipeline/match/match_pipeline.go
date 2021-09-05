@@ -16,17 +16,17 @@ func (p Pipeline) Pipe(entry *model.Entry) {
 	}
 
 	object := entry.PipelinedObject
-	found := false
+	matched := true
 	for key, value := range p.Match {
-		if object != nil && reflect.DeepEqual(object[key], value) {
-			found = true
+		toMatch, exist := object[key]
+		if !exist || !reflect.DeepEqual(toMatch, value) {
+			matched = false
 			break
 		}
 	}
-	if len(p.Match) > 0 && !found {
-		return
+	if len(p.Match) > 0 && !matched {
+		entry.PipelinedObject = make(model.Object)
 	}
-	entry.PipelinedObject = make(model.Object)
 }
 
 func (p Pipeline) Order() int {

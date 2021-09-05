@@ -18,6 +18,10 @@ type Renderer struct {
 func (c Renderer) Render(entry *model.Entry) {
 	output := entry.PipelinedObject
 
+	if len(output) == 0 {
+		return
+	}
+
 	var keys []string
 	for k := range output {
 		keys = append(keys, k)
